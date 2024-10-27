@@ -58,10 +58,11 @@ export const actions: Actions = {
 	},
 	register: async (event) => {
 		const formData = await event.request.formData();
-		const username = formData.get('username');
+		const username = formData.get('username') as string;
 		const password = formData.get('password');
+		console.log(username);
 
-		if (!validateUsername(username)) {
+		if (!username) {
 			return fail(400, { message: 'Invalid username' });
 		}
 		if (!validatePassword(password)) {
